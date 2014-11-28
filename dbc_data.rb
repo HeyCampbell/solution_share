@@ -1,3 +1,35 @@
+def review_more
+  puts "\nReview more solutions?"
+  print '>'
+  again = gets.chomp[0].downcase
+  if again == 'y'
+    exec('ruby solution_share.rb')
+  else
+    puts "\nThanks for using Solution Share!"
+  end
+end
+
+def open_link
+  puts "\nOpen link now?"
+  print '>'
+  visit = gets.chomp[0].downcase
+  if visit == 'y'
+    puts 'Opening link...'
+    exec('open ' + @final_url)
+  else
+    puts "\n#{@cohort[@student][0]}'s Week-#{@week_number} Challenge-#{@challenge_num} link:"
+    puts @final_url
+    review_more
+  end
+end
+
+def check_name
+  while !@cohort.include?(@student) # loop until given a valid last name
+    puts "\nError: Please enter correct last name:"
+    print ">"
+    @student = gets.chomp.downcase.to_sym
+  end
+end
 
 @week_1 = ['/phase-0-unit-1/tree/master/week-1/1-command-line',
           '/phase-0-unit-1/tree/master/week-1/2-computer-setup',
@@ -113,7 +145,8 @@
 @all_weeks = [@week_1, @week_2, @week_3, @week_4, @week_5, @week_6, @week_7, @week_8, @week_9]
 
 
-@desert_rabbits = {karlsberg: ['Aaron Karlsberg', 'aaronkarlsberg'],
+@desert_rabbits = {
+                  karlsberg: ['Aaron Karlsberg', 'aaronkarlsberg'],
                   esmaili: ['Ali Esmaili', 'AESM'],
                   vaughan: ['Andrew Vaughan', 'avaughan89'],
                   field: ['Angela Field', 'angelafield'],
@@ -142,3 +175,27 @@
                   fialho: ['Vivian Vieira Fialho', 'vivivf'],
                   tsang: ['William Tsang', 'kaawang']
                 }
+
+@eastern_moose = {
+                  singh: ['Amar Singh', 'ummerr'],
+                  kim: ['Daniel Kim', 'bungfoon'],
+                  shin: ['Daniella Shin', 'thedanplan'],
+                  reeves: ['Darrin Reeves', 'dxr4841'],
+                  deneroff: ['David Deneroff', 'daviddeneroff'],
+                  rifkin: ['David Rifkin', 'dlrifkin'],
+                  lee: ['Dongchul Lee', 'i-love-ruby'],
+                  miller: ['Jennifer Miller', 'JennMiller'],
+                  campbell: ['Jon Campbell', 'heycampbell'],
+                  breece: ['Kenn Breece', 'kjb085'],
+                  perumal:['Kevin Perumal', 'kevinperumal'],
+                  nguyen: ['Mai Nguyen','mxngyn'],
+                  boutaleb: ['Rayan Boutaleb', 'rayanb'],
+                  kartzman: ['Remy kartzman', 'rkartzman'],
+                  pergams: ['Rosa Pergams', 'rosapergams'],
+                  rathi: ['Sagar Rathi', 'sagararathi'],
+                  enriquez: ['Scott Enriquez', 'sjenriquez'],
+                  vietrova: ['Tamara Vietrova', 'Summerwind1005'],
+                  ratkalkar: ['Vivek Ratkalkar', 'vratkalkar']
+                }
+
+@cohort_dir = [@desert_rabbits, @eastern_moose]
